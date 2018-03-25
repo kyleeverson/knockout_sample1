@@ -9,11 +9,18 @@
 
 <h3>Details</h3>
 
-<p>First Name: <span data-bind="text: firstName"></span></p>
+<p>First Name: <input data-bind="value: firstName"/></p>
+<p>Last Name: <input data-bind="value: lastName"/></p>
+
+<p>Full Name: <span data-bind="text: fullName"></span></p>
 
 <script type="text/javascript">
 	var viewModel = {
-		firstName : "Kyle"
+		firstName : ko.observable("Kyle"),
+		lastName : ko.observable("Everson")
 	}
+	viewModel.fullName = ko.dependentObservable(function() {
+		return this.firstName() + " " + this.lastName();
+	}, viewModel);
 	ko.applyBindings(viewModel);
 </script>
