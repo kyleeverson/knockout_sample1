@@ -23,8 +23,8 @@
 		<input data-bind="value: name" />
 		<button data-bind="click: remove">Remove</button>
 
-		<input type="checkbox" data-bind="checked: isOnTwitter" />
-		<input data-bind="value: twitterName" />
+		<label><input type="checkbox" data-bind="checked: isOnTwitter" /> Is on Twitter </label>
+		<input data-bind="value: twitterName, visible: isOnTwitter" />
 	</li>
 </script>
 
