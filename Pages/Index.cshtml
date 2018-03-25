@@ -14,10 +14,30 @@
 
 <p>Full Name: <span data-bind="text: fullName"></span></p>
 
+<h2>Friends</h2>
+<ul data-bind="template: {name: 'friendsTemplate', foreach:friends}"></ul>
+<button data-bind="click: addFriend">Add friend</button>
+
+<script id="friendsTemplate" type="text/html">
+	<li>
+		<input data-bind="value: name" />
+	</li>
+</script>
+
 <script type="text/javascript">
+	function friend(name) {
+		return {
+			name : ko.observable(name)
+		}
+	}
+
 	var viewModel = {
 		firstName : ko.observable("Kyle"),
-		lastName : ko.observable("Everson")
+		lastName : ko.observable("Everson"),
+		friends : ko.observableArray([new friend("Johnny"), new friend("Able")]),
+		addFriend : function() {
+			this.friends.push(new friend("Another"));
+		}
 	}
 	viewModel.fullName = ko.dependentObservable(function() {
 		return this.firstName() + " " + this.lastName();
